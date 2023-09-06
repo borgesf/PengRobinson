@@ -21,8 +21,8 @@ set(groot, 'DefaultAxesFontName', 'Trebuchet MS');
 
 %% Setup
 % Define the range of pressures and the temperature for the analysis.
-pressures = linspace(1e5, 3e7, 500); % Pressure range in Pascal
-temperatureC = 30; % Temperature in Celsius
+pressures = linspace(1e5, 3e7, 100); % Pressure range in Pascal
+temperatureC = 35; % Temperature in Celsius
 
 methaneDensities = zeros(size(pressures));
 co2Densities = zeros(size(pressures));
