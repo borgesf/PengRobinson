@@ -1,4 +1,4 @@
-function rho = computeFluidDensity(P, T_Celsius, fluid)
+function rho = computeDensityPengRobinson(P, T_Celsius, fluid)
     %% Computes the fluid density using Peng-Robinson EOS
     % Based on the Peng-Robinson equation of state, as described in: 
     % "Peng, D. Y., & Robinson, D. B. (1976). A New Two-Constant Equation of State. 
@@ -7,21 +7,21 @@ function rho = computeFluidDensity(P, T_Celsius, fluid)
     % INPUT:
     %   - P: Pressure in Pascal
     %   - T_Celsius: Temperature in Celsius
-    %   - fluid: Either 'methane' or 'co2'
+    %   - fluid: Either 'ch4' or 'co2'
     % OUTPUT:
     %   - rho: Fluid density in kg/m^3
 
     arguments
         P (1,1) double {mustBePositive}
         T_Celsius (1,1) double
-        fluid (1,1) string {mustBeMember(fluid, ["methane", "co2"])}
+        fluid (1,1) string {mustBeMember(fluid, ["ch4", "co2"])}
     end
 
     R = 8.314; % Universal gas constant in J/(mol*K)
     T = T_Celsius + 273.15; % Convert temperature to Kelvin
 
     switch fluid
-        case "methane"
+        case "ch4"
             Tc = 190.56; % Critical temperature (K)
             Pc = 4.59e6; % Critical pressure (Pa)
             omega = 0.011;
@@ -30,7 +30,7 @@ function rho = computeFluidDensity(P, T_Celsius, fluid)
             Pc = 7.38e6; % Critical pressure (Pa)
             omega = 0.225;
         otherwise
-            error("Invalid fluid type. Choose either 'methane' or 'co2'.");
+            error("Invalid fluid type. Choose either 'ch4' or 'co2'.");
     end
 
     a = 0.45724 * (R^2 * Tc^2) / Pc;
@@ -67,7 +67,7 @@ function Mw = getMolarWeight(fluid)
     %   - Mw: Molar weight in kg/mol
 
     switch fluid
-        case "methane"
+        case "ch4"
             Mw = 0.01604; % kg/mol
         case "co2"
             Mw = 0.04401; % kg/mol
